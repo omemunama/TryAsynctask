@@ -36,17 +36,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //add progress bar
-
         progress_bar = (ProgressBar) findViewById(R.id.progressBar);
         progress_bar.setVisibility(View.VISIBLE);
 
         //setup adapter for populate data to listview
-
         name_list = (ListView) findViewById(R.id.listView);
         name_list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>()));
 
         //process adapter with asynctask
-
         arr_to_list_view = new AddArrayToListView();
         arr_to_list_view.execute();
     }
@@ -57,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         private int counter = 0;
 
         //handle loading progress with dialog
-
         ProgressDialog progress_dialog = new ProgressDialog(MainActivity.this);
 
         @Override
@@ -67,15 +63,13 @@ public class MainActivity extends AppCompatActivity {
             adapter = (ArrayAdapter<String>) name_list.getAdapter();
 
             //this for init progress dialog
-
-            progress_dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progress_dialog.setTitle("On Progress ....");
+            progress_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress_dialog.setTitle("Progress ....");
             progress_dialog.setCancelable(false);
             progress_dialog.setProgress(0);
 
             //this will handle cacle asynctack when click cancle button
-
-            progress_dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel Process", new DialogInterface.OnClickListener() {
+            progress_dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -97,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             for (String item : users) {
                 publishProgress(item);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -118,11 +112,9 @@ public class MainActivity extends AppCompatActivity {
             progress_bar.setProgress(current_status);
 
             //set progress only working for horizontal loading
-
             progress_dialog.setProgress(current_status);
 
             //setmessage will not working when using horizontal loading
-
             progress_dialog.setMessage(String.valueOf(current_status) + "%");
 
         }
@@ -131,11 +123,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
             //hide top progress bar
-
             progress_bar.setVisibility(View.INVISIBLE);
 
             //remove progress dialog
-
             progress_dialog.dismiss();
 
         }
